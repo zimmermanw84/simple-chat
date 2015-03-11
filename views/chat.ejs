@@ -7,13 +7,13 @@
 <body>
     <h2>Welcome to Simple Chat :) <%= user.username %></h2>
      <section id='chat-container' data-username='<%= user.username %>'>
-
+      <textarea style="height:300px;width:500px;"></textarea>
      </section>
     <p>
         <input id="chatText" type="text"/>
         <button id="chat">Send Chat Message</button>
     </p>
-    <a href="/logout"><button>Logout!</button></a>
+    <a href="/logout" id="logout"><button>Logout!</button></a>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/socket.js"></script>
 </body>

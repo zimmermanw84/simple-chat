@@ -87,18 +87,32 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 // Set up socket listen to server
 var io = require('socket.io').listen(server);
 
+// All Socket Server Logic
 io.on('connection', function(socket){
-  console.log('User connected');
 
-  socket.on('name', function(name) {
-    io.emit('name', name);
+  socket.on('user connected', function(username) {
+    io.emit('user connected', username);
   });
+
+  var message;
 
   socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
+    message = msg;
   });
 
-  socket.on('disconnect', function(){
-    console.log('user disconnected')
-  })
+  socket.on('name', function(name) {
+
+    information = {
+      handle: name,
+      message: message,
+    };
+
+    io.emit('chat message', information);
+  });
+
+  socket.on('user logout', function(username){
+    var logout = username + ' Logged out of Simple Chat'
+    io.emit('user logout', logout);
+  });
+
 })
