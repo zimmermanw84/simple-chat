@@ -22,13 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.PORT || 3000);
 
 mongoose.connect('mongodb://localhost/simpleChat');
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-// error handlers
+
 // Take out before deployment
 app.use(errorHandler());
 
@@ -37,12 +31,21 @@ app.get('/', function(req, res) {
 });
 
 app.get('/chat', function(req, res) {
-  req.render('chat.ejs');
+  res.render('chat.ejs');
 });
 
 app.post('/login', function(req, res) {
+  models.User.findOne({ email: req.body.email }, " username password email", function(err, user) {
+    if (user.password === req.body.password) {
+      console.log(user)
+      res.redirect('/chat')
+      // res.redirect('/chat');
+    }
+  });
+});
 
-
+app.get('/logout', function(req, res) {
+  res.redirect('/');
 });
 
 app.post('/register', function(req, res) {
