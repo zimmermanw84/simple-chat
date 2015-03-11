@@ -80,9 +80,25 @@ app.post('/register', function(req, res) {
   res.redirect('/');
 });
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port') + " - visit http://localhost:3000/");
 });
 
 // Set up socket listen to server
-// var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
+
+io.on('connection', function(socket){
+  console.log('User connected');
+
+  socket.on('name', function(name) {
+    io.emit('name', name);
+  });
+
+  socket.on('chat message', function(msg) {
+    io.emit('chat message', msg);
+  });
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected')
+  })
+})
