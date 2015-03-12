@@ -137,4 +137,4 @@ io.on('connection', function(socket){
     io.emit('user logout', logout);
   });
 
-})
+});
