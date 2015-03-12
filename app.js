@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var errorHandler = require('errorhandler');
 var app = express();
 var cookieSession = require('cookie-session');
+var bcrypt = require('bcryptjs');
 
 // models
 var models = require('./models');
@@ -31,7 +32,7 @@ app.use(cookieParser());
 // Switch Before deployment
 //mongodb://localhost/simpleChat
 // mongodb://UDQRgeXtlPWa:viIerujzlfdB@mongosoup-cont002.mongosoup.de:32232/cc_UDQRgeXtlPWa
-mongoose.connect('mongodb://UDQRgeXtlPWa:viIerujzlfdB@mongosoup-cont002.mongosoup.de:32232/cc_UDQRgeXtlPWa');
+mongoose.connect('mongodb://localhost/simpleChat');
 // Take out before deployment
 app.use(errorHandler());
 app.use(logger('dev'));
@@ -57,11 +58,15 @@ app.get('/chat', authUser, function(req, res) {
 
 app.post('/login', function(req, res) {
   models.User.findOne({ email: req.body.email }, " username password email", function(err, user) {
-    if (user.password === req.body.password) {
-      req.session.user = user;
-      res.redirect('/chat');
+    if (!user) {
+      res.send("Something went wrong!");
     } else {
-      res.redirect('/');
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+        req.session.user = user;
+        res.redirect('/chat');
+      } else {
+        res.send("Incorrect email or password!");
+      }
     }
   });
 });
@@ -73,13 +78,28 @@ app.get('/logout', function(req, res) {
 });
 
 app.post('/register', function(req, res) {
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(req.body.password, salt);
+
   var user = new models.User({
     username: req.body.username,
-    password: req.body.password,
+    password: hash,
     email: req.body.email,
   });
-  user.save();
-  res.redirect('/');
+  user.save(function(err) {
+    if (err) {
+      var error = "Broken! Please try again!";
+
+      if (err.code === 11000) {
+        error = "Email is already taken, please try another!";
+      }
+
+      res.send(error);
+    } else {
+      req.session.user = user;
+      res.redirect('/chat');
+    }
+  });
 });
 
 var server = http.createServer(app).listen(app.get('port'), function(){
