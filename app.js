@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser'); // Gonna try and use sessions
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 var mongoose = require('mongoose');
@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 
 // Take out before deployment
-app.use(errorHandler());
+// app.use(errorHandler());
 
 // Auth Middleware
 var authUser = function(req, res, next) {
