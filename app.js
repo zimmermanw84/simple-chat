@@ -12,7 +12,7 @@ var bcrypt = require('bcryptjs');
 
 // models
 var models = require('./models');
-
+var localMongo = 'mongodb://localhost/simpleChat'
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -30,9 +30,7 @@ app.use(cookieSession({
 app.use(cookieParser());
 
 // Switch Before deployment
-//mongodb://localhost/simpleChat
-// mongodb://UDQRgeXtlPWa:viIerujzlfdB@mongosoup-cont002.mongosoup.de:32232/cc_UDQRgeXtlPWa
-mongoose.connect('mongodb://localhost/simpleChat');
+mongoose.connect(process.env.MONGOSOUP_URL || localMongo);
 // Take out before deployment
 app.use(errorHandler());
 app.use(logger('dev'));
@@ -43,7 +41,7 @@ var authUser = function(req, res, next) {
     res.redirect('/');
   } else {
     next();
-  };
+  }
 };
 
 // Routes
@@ -52,7 +50,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/chat', authUser, function(req, res) {
-  res.locals.user = req.session.user
+  res.locals.user = req.session.user;
   res.render('chat.ejs');
 });
 
