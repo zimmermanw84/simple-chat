@@ -32,7 +32,7 @@ app.use(cookieParser());
 // Switch Before deployment
 //mongodb://localhost/simpleChat
 // mongodb://UDQRgeXtlPWa:viIerujzlfdB@mongosoup-cont002.mongosoup.de:32232/cc_UDQRgeXtlPWa
-mongoose.connect('mongodb://UDQRgeXtlPWa:viIerujzlfdB@mongosoup-cont002.mongosoup.de:32232/cc_UDQRgeXtlPWa');
+mongoose.connect('mongodb://localhost/simpleChat');
 // Take out before deployment
 app.use(errorHandler());
 app.use(logger('dev'));
