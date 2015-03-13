@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
- <head>
+<head>
     <title>Simple Chat</title>
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <link rel="stylesheet" src="/normalize-css.googlecode.com/svn/trunk/normalize.css" />
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"> -->
+    <link rel="icon"
+    type="image/jpg"
+    href="/images/salt-shaker.jpg"/>
 </head>
 <body>
-
-    <h1>Salty Chat</h1>
-
-    <h2>Login</h2>
-    <form action="/login" method="POST">
-        <h3>Email</h3>
-        <input type="text" name="email" require/>
-        <h3>Password</h3>
-        <input type="password" name="password"require/>
-        <p>
-            <input type="submit" value="Log In"/>
-        </p>
-    </form>
-    <h2>Register</h2>
-    <form action="/register" method="POST">
-        <h3>Email</h3>
-        <input type="text" name="email" require/>
-        <h3>Username</h3>
-        <input type="text" name="username"require/>
-        <h3>Password</h3>
-        <input type="password" name="password"require/>
-        <p>
+    <div class="container">
+        <div class="jumbotron">
+        <h1>Salty Chat <small>Sprinkle some salt on em'</small></h1>
+        </div>
+            <h2 class="page-header">Login</h2>
+            <form class="form-horizontal" role="form" action="/login" method="POST">
+                <h3>Email</h3>
+                <input for="email" class="form-control" type="text" name="email" require/>
+                <h3>Password</h3>
+                <input class="form-control" type="password" name="password"require/>
+                <input type="submit" value="Log In"/>
+            </form>
+        <h2 class="page-header">Register</h2>
+        <form class="form-horizontal" action="/register" method="POST">
+            <h3>Email</h3>
+            <input class="form-control" type="text" name="email" require/>
+            <h3>Username</h3>
+            <input class="form-control" type="text" name="username"require/>
+            <h3>Password</h3>
+            <input for="email" class="form-control" type="password" name="password"require/>
             <input type="submit" value="Log In - Register"/>
-        </p>
-    </form>
+        </form>
+</div>
 </body>
 </html>

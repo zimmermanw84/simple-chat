@@ -3,11 +3,18 @@
  <head>
     <title>Salty Chat</title>
     <script src="/socket.io/socket.io.js"></script>
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <link rel="stylesheet" src="/normalize-css.googlecode.com/svn/trunk/normalize.css" />
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" src="/stylesheets/style.css">
+    <link rel="icon"
+  type="image/jpg"
+  href="/images/salt-shaker.jpg"/>
 </head>
 <body>
-    <h2>Welcome to Salty Chat :) <%= user.username %></h2>
+    <div class="container">
+    <div class="jumbotron">
+    <h1>Welcome to Salty Chat <%= user.username %></h1>
+</div>
      <section id='chat-container' data-username='<%= user.username %>'>
       <textarea style="height:300px;width:500px;"></textarea>
      </section>
@@ -16,6 +23,7 @@
         <button id="chat">Send Chat Message</button>
     </p>
     <a href="/logout" id="logout"><button>Logout!</button></a>
+</div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="/javascripts/socket.js"></script>
 </body>

@@ -12,7 +12,6 @@ var bcrypt = require('bcryptjs');
 
 // models
 var models = require('./models');
-var localMongo = 'mongodb://localhost/simpleChat'
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -21,6 +20,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.PORT || 3000);
 
+var localMongo = 'mongodb://localhost/simpleChat'
+mongoose.connect(process.env.MONGOSOUP_URL || localMongo);
 
 // Session Config
 app.use(cookieSession({
@@ -29,8 +30,6 @@ app.use(cookieSession({
 }));
 app.use(cookieParser());
 
-// Switch Before deployment
-mongoose.connect(process.env.MONGOSOUP_URL || localMongo);
 // Take out before deployment
 app.use(errorHandler());
 app.use(logger('dev'));
