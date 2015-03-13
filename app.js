@@ -20,8 +20,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.PORT || 3000);
 
-var localMongo = 'mongodb://localhost/simpleChat'
-mongoose.connect(process.env.MONGOSOUP_URL || localMongo);
+mongoose.connect(process.env.MONGOSOUP_URL || 'mongodb://localhost/simpleChat');
 
 // Session Config
 app.use(cookieSession({
@@ -130,7 +129,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('user logout', function(username){
-    var logout = username + ' Logged out of Simple Chat'
+    var logout = username + ' Logged out of Salty Chat'
     io.emit('user logout', logout);
   });
 

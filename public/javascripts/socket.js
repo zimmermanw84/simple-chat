@@ -18,7 +18,7 @@ $(document).ready(function(){
 });
 
 socket.on('user connected', function(username) {
-    var msg = username +' is connected to Simple Chat';
+    var msg = username +' is connected to Salty Chat';
    $('textarea').val($('textarea').val()+msg+'\n');
 });
 
