@@ -3,9 +3,8 @@
  <head>
     <title>Salty Chat</title>
     <script src="/socket.io/socket.io.js"></script>
-    <link rel="stylesheet" src="/normalize-css.googlecode.com/svn/trunk/normalize.css" />
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" src="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
     <link rel="icon"
   type="image/jpg"
   href="/images/salt-shaker.jpg"/>
@@ -16,7 +15,6 @@
     <h1>Welcome to Salty Chat <%= user.username %></h1>
 </div>
      <section id='chat-container' data-username='<%= user.username %>'>
-      <textarea style="height:300px;width:500px;"></textarea>
      </section>
     <p>
         <input id="chatText" type="text"/>

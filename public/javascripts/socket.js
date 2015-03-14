@@ -1,15 +1,24 @@
 var socket = io();
 
-$('#chat').on('click', function() {
+var sendSocketChat = function() {
     socket.emit('chat message', $('#chatText').val());
     socket.emit('name', $('#chat-container').data('username'));
     $('#chatText').val('');
     return false;
+};
+
+
+$('#chat').on('click', sendSocketChat);
+
+$(document).keypress(function(e) {
+    if (e.keyCode === 13) {
+        sendSocketChat();
+    }
 });
 
 socket.on('chat message', function(info) {
     var msg = info.handle +': '+ info.message;
-    $('textarea').val($('textarea').val()+msg+'\n');
+    $("#chat-container").prepend("<p>"+msg+"</p>");
 });
 
 $(document).ready(function(){
@@ -19,7 +28,7 @@ $(document).ready(function(){
 
 socket.on('user connected', function(username) {
     var msg = username +' is connected to Salty Chat';
-   $('textarea').val($('textarea').val()+msg+'\n');
+   $("#chat-container").prepend("<p>"+msg+"</p>");
 });
 
 $('#logout').on('click', function(){
@@ -28,5 +37,5 @@ $('#logout').on('click', function(){
 });
 
 socket.on('user logout', function(msg) {
-   $('textarea').val($('textarea').val()+msg+'\n');
+   $("#chat-container").prepend("<p>"+msg+"</p>");
 });

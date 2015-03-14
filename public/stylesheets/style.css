@@ -7,3 +7,13 @@ a {
   color: #00B7FF;
 }
 
+#chat-container {
+  height:300px;
+  width:500px;
+  border: 1px solid black;
+  overflow: scroll;
+  margin-bottom: 1em;
+}
+
+
+
