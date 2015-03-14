@@ -15,5 +15,14 @@ a {
   margin-bottom: 1em;
 }
 
+date {
+  color: green;
+  margin-left: 4em;
+}
 
+p {
+  margin-left: 0.5em;
+  padding-top: 0.5em;
+  margin-top: 0;
+}
 

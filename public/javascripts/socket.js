@@ -7,6 +7,10 @@ var sendSocketChat = function() {
     return false;
 };
 
+var reFocusScroll = function() {
+    $("#chat-container")[0].scrollTop = $("#chat-container")[0].scrollHeight;
+};
+
 
 $('#chat').on('click', sendSocketChat);
 
@@ -18,7 +22,8 @@ $(document).keypress(function(e) {
 
 socket.on('chat message', function(info) {
     var msg = info.handle +': '+ info.message;
-    $("#chat-container").prepend("<p>"+msg+"</p>");
+    $("#chat-container").append("<p>"+msg+"</p>");
+    reFocusScroll();
 });
 
 $(document).ready(function(){
@@ -27,8 +32,11 @@ $(document).ready(function(){
 });
 
 socket.on('user connected', function(username) {
+    var date = new Date();
+    var dateRendered = "<date>"+date.toLocaleString()+"<date>"
     var msg = username +' is connected to Salty Chat';
-   $("#chat-container").prepend("<p>"+msg+"</p>");
+   $("#chat-container").append("<p>"+msg+" "+dateRendered+"</p>");
+   reFocusScroll();
 });
 
 $('#logout').on('click', function(){
@@ -37,5 +45,8 @@ $('#logout').on('click', function(){
 });
 
 socket.on('user logout', function(msg) {
-   $("#chat-container").prepend("<p>"+msg+"</p>");
+    var date = new Date();
+    var dateRendered = "<date>"+date.toLocaleString()+"<date>"
+   $("#chat-container").append("<p>"+msg+" "+dateRendered+"</p>");
+   reFocusScroll();
 });
