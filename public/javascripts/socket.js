@@ -11,7 +11,6 @@ var reFocusScroll = function() {
     $("#chat-container")[0].scrollTop = $("#chat-container")[0].scrollHeight;
 };
 
-
 $('#chat').on('click', sendSocketChat);
 
 $(document).keypress(function(e) {
